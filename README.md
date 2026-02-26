@@ -54,8 +54,8 @@ Program deteksi gerakan tangan secara real-time menggunakan **MediaPipe** dan **
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/username/hand-gesture-recognition.git
-cd hand-gesture-recognition
+git clone https://github.com/IlhamXkyo/TrackingHand
+cd TrackingHand
 ```
 
 ### 2. Buat Virtual Environment (Opsional tapi direkomendasikan)
