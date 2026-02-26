@@ -195,10 +195,9 @@ Project ini dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE
 
 ## 📞 Kontak
 
-- **Nama**: [Nama Anda]
-- **Email**: [email@example.com]
-- **LinkedIn**: [linkedin.com/in/username](https://linkedin.com/in/username)
-- **GitHub**: [github.com/username](https://github.com/username)
+- **Nama**: muhammad ilham
+- **Email**: xanderilham4@gmail.com
+- **GitHub**: [github.com/username](https://github.com/IlhamXkyo)
 
 ---
 
