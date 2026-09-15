@@ -1,256 +1,106 @@
-Tentu! Berikut adalah file README.md yang lengkap dan profesional untuk project hand gesture recognition Anda:
+# 🖐️ TrackingHand v2.0 // Dual-Mode Air Controller & Roblox Driver
 
-# 🖐️ Hand Gesture Recognition
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
+[![MediaPipe](https://img.shields.io/badge/Vision-MediaPipe_0.10-00f0ff.svg)](https://developers.google.com/mediapipe)
+[![DirectInput](https://img.shields.io/badge/DirectInput-Roblox_Ready-38bdf8.svg)](https://pypi.org/project/PyDirectInput/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg)](LICENSE)
 
-![Python](https://img.shields.io/badge/Python-3.7%2B-blue)
-![OpenCV](https://img.shields.io/badge/OpenCV-4.8%2B-green)
-![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10.13%2B-orange)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+> **TrackingHand v2.0** turns your standard webcam into an interactive AI gesture controller for your **Windows Desktop** (Air Mouse) and **3D Games like Roblox & Minecraft** (DirectInput WASD + Camera Aim). Comes with an interactive animated onboarding tutorial HUD and one-click executable builder.
 
-Program deteksi gerakan tangan secara real-time menggunakan **MediaPipe** dan **OpenCV**. Dapat mengenali berbagai gestur tangan seperti kepalan, victory, telapak terbuka, dan lainnya.
+---
 
-## 📋 Daftar Isi
-- [Fitur](#fitur)
-- [Demo](#demo)
-- [Persyaratan Sistem](#persyaratan-sistem)
-- [Instalasi](#instalasi)
-- [Cara Penggunaan](#cara-penggunaan)
-- [Gestur yang Didukung](#gestur-yang-didukung)
-- [Struktur Project](#struktur-project)
-- [Troubleshooting](#troubleshooting)
-- [Kontribusi](#kontribusi)
-- [Lisensi](#lisensi)
+## 🌟 Dual Operating Modes
 
-## ✨ Fitur
+Press **`M`** at any time to toggle between the two modes:
 
-- ✅ Deteksi tangan secara real-time (30+ FPS)
-- ✅ Support 2 tangan sekaligus (kiri dan kanan)
-- ✅ Menghitung jumlah jari yang terbuka
-- ✅ Mengenali 6 gestur dasar:
-  - 👊 Kepalan (0 jari)
-  - ☝️ Menunjuk (1 jari)
-  - ✌️ Victory (2 jari)
-  - 🖖 Tiga jari (3 jari)
-  - 🖐️ Empat jari (4 jari)
-  - ✋ Telapak terbuka (5 jari)
-- ✅ Informasi detail jari yang terbuka
-- ✅ Tampilan UI yang informatif
-- ✅ Indikator FPS real-time
-- ✅ Mudah dikembangkan untuk gestur kustom
+### 🖥️ Mode 1: Windows Air Mouse ("Iron Man" Mode)
+Control your desktop and applications without touching a physical mouse:
+* **Cursor Movement**: Point with your index finger. Exponential Moving Average (EMA) smoothing eliminates trembling and hand jitter.
+* **Left Click & Drag**: Pinch thumb tip and index tip together ($< 32$ px). Hold pinch to drag windows or files.
+* **Right Click**: Form a Two-Finger Peace / Victory sign (`V-Sign`).
+* **Scroll Document/Browser**: Open palm moving up/down in the camera view.
 
-## 🎥 Demo
+---
 
-![Demo Hand Gesture](demo.gif)
-*Tampilan program saat mendeteksi gestur tangan*
+### 🎮 Mode 2: Roblox / 3D Game Controller (DirectInput)
+Compatible with **Roblox**, **Minecraft**, and other DirectX games that require raw keyboard/mouse scan codes:
 
-## 💻 Persyaratan Sistem
+| Hand | Gesture | Action in Game |
+| :--- | :--- | :--- |
+| **Left Hand** | Point Upwards | Move Forward (**`W`**) |
+| **Left Hand** | Point Downwards | Move Backward (**`S`**) |
+| **Left Hand** | Point Left / Right | Strafe Left (**`A`**) / Right (**`D`**) |
+| **Left Hand** | Raise Thumb / Open Palm Up | Jump (**`Spacebar`**) |
+| **Right Hand** | Index finger navigation | 360° Camera Look (Mouse Aim) |
+| **Right Hand** | Pinch (Thumb + Index) | Action / Tool / Attack (**Left Click**) |
 
-- **Python**: 3.7 atau lebih baru
-- **Webcam**: Kamera internal atau eksternal
-- **RAM**: Minimal 4GB (rekomendasi 8GB)
-- **OS**: Windows/Linux/MacOS
+---
 
-## 🔧 Instalasi
+## 🎨 Interactive Animated Tutorial HUD
 
-### 1. Clone Repository
+Upon startup, an animated onboarding guide is rendered directly over your camera feed:
+* Displays step-by-step gesture illustrations.
+* Real-time landmark skeleton tracking confirms that your hand is properly positioned.
+* Press **`TAB`** to switch between Windows and Game mode tutorials.
+* Press **`SPACE`** or **`ENTER`** to dismiss the tutorial and engage active control.
+* Press **`T`** at any time during gameplay to bring back the tutorial.
+
+---
+
+## 🚀 Quick Run (One-Click)
+
+### Cara 1: Menggunakan Launcher Batch (Paling Praktis)
+Cukup klik ganda berkas:
+```
+run_controller.bat
+```
+Script ini akan otomatis memeriksa Python, menginstall dependensi yang diperlukan (`opencv`, `mediapipe`, `pydirectinput`, `pyautogui`), dan langsung membuka controller.
+
+---
+
+### Cara 2: Menjalankan via Terminal / CMD
 ```bash
-git clone https://github.com/IlhamXkyo/TrackingHand
+# 1. Clone repository
+git clone https://github.com/IlhamXkyo/TrackingHand.git
 cd TrackingHand
-```
 
-### 2. Buat Virtual Environment (Opsional tapi direkomendasikan)
-```bash
-# Windows
-python -m venv venv
-venv\Scripts\activate
-
-# Linux/Mac
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### 3. Install Dependencies
-```bash
+# 2. Install dependensi
 pip install -r requirements.txt
-```
 
-Atau install manual:
-```bash
-pip install opencv-python mediapipe==0.10.13 numpy
-```
-
-### 4. Jalankan Program
-```bash
+# 3. Jalankan
 python main.py
 ```
 
-## 📖 Cara Penggunaan
+---
 
-1. **Jalankan program**:
-   ```bash
-   python main.py
+## 📦 Compile ke Standalone Windows `.EXE`
+
+Ingin menjalankan aplikasi tanpa perlu membuka terminal atau menginstall Python di komputer lain?
+
+1. Jalankan berkas:
+   ```
+   build_exe.bat
+   ```
+2. Tunggu proses PyInstaller selesai (sekitar 1-2 menit).
+3. File executable akan tersedia di folder:
+   ```
+   dist/TrackingHand/TrackingHand.exe
    ```
 
-2. **Posisikan tangan** Anda di depan webcam dengan jarak 30-70 cm
+---
 
-3. **Lakukan gestur** yang ingin dideteksi
+## ⌨️ Hotkeys
 
-4. **Lihat hasil** di layar:
-   - Jumlah tangan terdeteksi
-   - Label tangan (kiri/kanan)
-   - Jumlah jari terbuka
-   - Nama gestur dengan icon
-   - Detail jari yang terbuka
-
-5. **Keluar program**: Tekan tombol `q` atau `ESC`
-
-## 🎯 Gestur yang Didukung
-
-| Jumlah Jari | Nama Gestur | Icon | Deskripsi |
-|------------|-------------|------|-----------|
-| 0 | Kepalan | 👊 | Semua jari mengepal |
-| 1 | Menunjuk | ☝️ | Hanya telunjuk terbuka |
-| 2 | Victory | ✌️ | Telunjuk dan tengah terbuka |
-| 3 | Tiga Jari | 🖖 | Telunjuk, tengah, manis terbuka |
-| 4 | Empat Jari | 🖐️ | Empat jari terbuka (ibu jari tertutup) |
-| 5 | Telapak Terbuka | ✋ | Semua jari terbuka |
-
-## 📁 Struktur Project
-
-```
-hand-gesture-recognition/
-│
-├── main.py                 # Program utama
-├── requirements.txt        # Daftar dependencies
-├── README.md              # Dokumentasi
-├── LICENSE                # File lisensi
-│
-├── src/                   # (Opsional) Untuk pengembangan lanjutan
-│   ├── detector.py        # Modul deteksi tangan
-│   ├── gesture_recognizer.py  # Modul pengenalan gestur
-│   └── utils.py           # Fungsi utilitas
-│
-├── assets/                # Gambar dan aset
-│   └── demo.gif          # GIF demo
-│
-└── tests/                 # Unit tests
-    └── test_detector.py
-```
-
-## 🔍 Troubleshooting
-
-### Error: "module 'mediapipe' has no attribute 'solutions'"
-**Solusi**: Install versi MediaPipe yang kompatibel
-```bash
-pip uninstall mediapipe
-pip install mediapipe==0.10.13
-```
-
-### Webcam tidak terdeteksi
-**Solusi**: 
-- Coba ganti index kamera dari 0 ke 1:
-  ```python
-  cap = cv2.VideoCapture(1)  # Ganti 0 dengan 1
-  ```
-- Pastikan webcam tidak digunakan program lain
-
-### Program berjalan lambat
-**Solusi**:
-- Turunkan resolusi webcam
-- Kurangi nilai `model_complexity` menjadi 0
-- Tutup program lain yang berat
-
-### Deteksi kurang akurat
-**Solusi**:
-- Perbaiki pencahayaan ruangan
-- Jaga jarak tangan 30-70 cm dari kamera
-- Hindari background yang terlalu ramai
-
-## 🤝 Kontribusi
-
-Kontribusi selalu diterima! Berikut cara berkontribusi:
-
-1. **Fork** repository ini
-2. **Buat branch** baru: `git checkout -b fitur-baru`
-3. **Commit** perubahan: `git commit -m 'Menambah fitur X'`
-4. **Push** ke branch: `git push origin fitur-baru`
-5. Buat **Pull Request**
-
-### Ide Pengembangan
-- [ ] Tambahkan dukungan untuk lebih banyak gestur
-- [ ] Integrasi dengan mouse virtual
-- [ ] Kontrol presentasi dengan gestur
-- [ ] Game controller dengan tangan
-- [ ] GUI dengan PyQt/Tkinter
-
-## 📄 Lisensi
-
-Project ini dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE) untuk detail.
-
-## 🙏 Credit
-
-- [MediaPipe](https://mediapipe.dev/) oleh Google
-- [OpenCV](https://opencv.org/) library
-- Inspirasi dari berbagai tutorial dan dokumentasi
-
-## 📞 Kontak
-
-- **Nama**: muhammad ilham
-- **Email**: xanderilham4@gmail.com
-- **GitHub**: [github.com/username](https://github.com/IlhamXkyo)
+- **`M`**: Ganti mode (**WINDOWS AIR MOUSE** $\leftrightarrow$ **ROBLOX GAME CONTROLLER**).
+- **`T`**: Buka/tutup kembali panduan tutorial visual.
+- **`TAB`**: Ganti halaman tutorial (Halaman 1: Windows / Halaman 2: Roblox).
+- **`SPACE` / `ENTER`**: Mulai kontrol dari layar tutorial.
+- **`Q`**: Keluar dari aplikasi dengan aman (melepaskan semua tombol keyboard yang tertahan).
 
 ---
 
-## 📦 File requirements.txt
+## 📜 Lisensi
 
-Buat file `requirements.txt` dengan isi:
+Didistribusikan di bawah lisensi MIT. Lihat berkas `LICENSE` untuk detailnya.
 
-```txt
-opencv-python>=4.8.0
-mediapipe==0.10.13
-numpy>=1.24.0
-```
-
-## 🚀 Cara Upload ke GitHub
-
-```bash
-# Inisialisasi git
-git init
-
-# Tambahkan semua file
-git add .
-
-# Commit pertama
-git commit -m "Initial commit: Hand Gesture Recognition"
-
-# Tambahkan remote repository
-git remote add origin https://github.com/username/hand-gesture-recognition.git
-
-# Push ke GitHub
-git branch -M main
-git push -u origin main
-```
-
-## 📝 Catatan Tambahan
-
-### Untuk pengembang yang ingin memodifikasi:
-
-**Menambah gestur baru**:
-Edit dictionary `self.gestures` di file `main.py`:
-```python
-self.gestures = {
-    # ... gestur yang sudah ada
-    6: {
-        'name': 'GESTUR BARU',
-        'icon': '🆕',
-        'color': (255, 255, 255)
-    }
-}
-```
-
-**Mengubah logika deteksi jari**:
-Modifikasi fungsi `get_finger_status()` sesuai kebutuhan.
-
----
-
-**Selamat mencoba!** Jika ada pertanyaan atau masalah, silakan buat issue di repository ini. ⭐ Jangan lupa beri star jika project ini bermanfaat!
+Dibuat dengan ❤️ oleh [IlhamXkyo](https://github.com/IlhamXkyo).
