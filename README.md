@@ -1,106 +1,117 @@
-# 🖐️ TrackingHand v2.0 // Dual-Mode Air Controller & Roblox Driver
+# 🖐️ TrackingHand v3.0 // AI Gesture Suite & Roblox 3D Bionic Hand MoCap
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![MediaPipe](https://img.shields.io/badge/Vision-MediaPipe_0.10-00f0ff.svg)](https://developers.google.com/mediapipe)
+[![Roblox](https://img.shields.io/badge/Roblox-Studio_Ready-e11d48.svg)](https://create.roblox.com/)
 [![DirectInput](https://img.shields.io/badge/DirectInput-Roblox_Ready-38bdf8.svg)](https://pypi.org/project/PyDirectInput/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg)](LICENSE)
 
-> **TrackingHand v2.0** turns your standard webcam into an interactive AI gesture controller for your **Windows Desktop** (Air Mouse) and **3D Games like Roblox & Minecraft** (DirectInput WASD + Camera Aim). Comes with an interactive animated onboarding tutorial HUD and one-click executable builder.
+> **TrackingHand** mengubah webcam laptop standar Anda menjadi pengontrol gesture AI interaktif untuk **Windows Desktop**, **Game 3D**, dan **Sistem Motion Capture Real-time Tangan Robot Bionik di Roblox Studio**.
 
 ---
 
-## 🌟 Dual Operating Modes
+## 🌟 Fitur Utama
 
-Press **`M`** at any time to toggle between the two modes:
+### 🤖 1. Roblox 3D Bionic Hand MoCap & Cyber HUD Replica (BARU!)
+Koneksikan webcam Anda langsung ke model tangan robot bionik 107-komponen di dalam Roblox Studio:
+* **Replika Visual Tangan Robot di Kamera:** Kerangka garis standar MediaPipe diubah menjadi **replika visual tangan robot Roblox** langsung di atas frame video Anda (pelat lapis baja karbon, lampu neon cyan bercahaya `#00E6FF`, aktuator knuckle krom, dan reaktor inti telapak tangan).
+* **Kinematika Biomekanik Ibu Jari Manusia:** Model sendi pelana CMC (*Carpometacarpal*), MCP, dan IP terkalibrasi dengan rotasi pronasi internal $75^\circ$ dan basis ortonormal telapak tangan 3D. Menekuk jempol tidak akan mengacaukan sudut mekar jempol (*100% decoupled*).
+* **Zero HTTP Rate-Limit Crashing:** Polling stream otomatis dioptimasi ke ~7.1 req/detik (di bawah kuota batas 500 req/menit Roblox HttpService). Visual di Roblox Studio tetap halus di **60 FPS** menggunakan interpolasi *exponential lerp*.
 
-### 🖥️ Mode 1: Windows Air Mouse ("Iron Man" Mode)
-Control your desktop and applications without touching a physical mouse:
-* **Cursor Movement**: Point with your index finger. Exponential Moving Average (EMA) smoothing eliminates trembling and hand jitter.
-* **Left Click & Drag**: Pinch thumb tip and index tip together ($< 32$ px). Hold pinch to drag windows or files.
-* **Right Click**: Form a Two-Finger Peace / Victory sign (`V-Sign`).
-* **Scroll Document/Browser**: Open palm moving up/down in the camera view.
+#### Cara Menjalankan Bionic Hand MoCap:
+1. **Jalankan Tracker di Komputer:**
+   Klik dua kali:
+   ```cmd
+   run_hand_tracker.bat
+   ```
+   *(Atau jalankan `python hand_tracker.py` di terminal)*
+2. **Buka Roblox Studio:**
+   Tekan **Play** (`F5`) atau **Run** (`F8`). Tangan robot di game akan bergerak 1:1 mengikuti gerakan tangan Anda di depan webcam!
+3. *(Opsional)* Jika membuat map/place baru dari nol:
+   - Salin isi berkas [`roblox/BuildRoboticHand.lua`](roblox/BuildRoboticHand.lua) dan jalankan di Command Bar Roblox Studio untuk membuat model tangan bionik seketika.
+   - Pasang berkas [`roblox/RoboticHandController.lua`](roblox/RoboticHandController.lua) ke dalam `ServerScriptService`.
 
 ---
 
-### 🎮 Mode 2: Roblox / 3D Game Controller (DirectInput)
-Compatible with **Roblox**, **Minecraft**, and other DirectX games that require raw keyboard/mouse scan codes:
+### 🖥️ 2. Windows Air Mouse ("Iron Man" Mode)
+Kontrol desktop dan aplikasi Windows tanpa menyentuh mouse fisik:
+* **Pergerakan Kursor:** Arahkan dengan jari telunjuk. Dilengkapi *Exponential Moving Average (EMA)* untuk memfilter getaran tangan.
+* **Klik Kiri & Drag:** Cubitkan ujung jempol dan telunjuk ($< 32$ px). Tahan untuk drag file/jendela.
+* **Klik Kanan:** Bentuk gestur dua jari *Peace / Victory* (`V-Sign`).
+* **Scroll Dokumen/Browser:** Gerakkan telapak tangan terbuka naik/turun di depan kamera.
 
-| Hand | Gesture | Action in Game |
+---
+
+### 🎮 3. Roblox & 3D Game Controller (DirectInput)
+Kompatibel dengan **Roblox**, **Minecraft**, dan game DirectX lainnya menggunakan raw keyboard scan codes:
+
+| Tangan | Gestur | Aksi di Dalam Game |
 | :--- | :--- | :--- |
-| **Left Hand** | Point Upwards | Move Forward (**`W`**) |
-| **Left Hand** | Point Downwards | Move Backward (**`S`**) |
-| **Left Hand** | Point Left / Right | Strafe Left (**`A`**) / Right (**`D`**) |
-| **Left Hand** | Raise Thumb / Open Palm Up | Jump (**`Spacebar`**) |
-| **Right Hand** | Index finger navigation | 360° Camera Look (Mouse Aim) |
-| **Right Hand** | Pinch (Thumb + Index) | Action / Tool / Attack (**Left Click**) |
+| **Tangan Kiri** | Tunjuk ke Atas | Jalan Maju (**`W`**) |
+| **Tangan Kiri** | Tunjuk ke Bawah | Jalan Mundur (**`S`**) |
+| **Tangan Kiri** | Tunjuk ke Kiri / Kanan | Belok Kiri (**`A`**) / Kanan (**`D`**) |
+| **Tangan Kiri** | Buka Telapak / Angkat Jempol | Melompat (**`Spacebar`**) |
+| **Tangan Kanan** | Gerakan Telunjuk | Arah Kamera 360° (*Mouse Aim*) |
+| **Tangan Kanan** | Cubit (Jempol + Telunjuk) | Pukul / Serang (**Klik Kiri**) |
 
 ---
 
-## 🎨 Interactive Animated Tutorial HUD
+## 🚀 Panduan Memulai Cepat
 
-Upon startup, an animated onboarding guide is rendered directly over your camera feed:
-* Displays step-by-step gesture illustrations.
-* Real-time landmark skeleton tracking confirms that your hand is properly positioned.
-* Press **`TAB`** to switch between Windows and Game mode tutorials.
-* Press **`SPACE`** or **`ENTER`** to dismiss the tutorial and engage active control.
-* Press **`T`** at any time during gameplay to bring back the tutorial.
+### Menggunakan Batch Launcher (Paling Praktis)
+* Untuk **Roblox Bionic Hand MoCap**: Klik ganda `run_hand_tracker.bat`
+* Untuk **Air Mouse & Game Controller**: Klik ganda `run_controller.bat`
 
----
-
-## 🚀 Quick Run (One-Click)
-
-### Cara 1: Menggunakan Launcher Batch (Paling Praktis)
-Cukup klik ganda berkas:
-```
-run_controller.bat
-```
-Script ini akan otomatis memeriksa Python, menginstall dependensi yang diperlukan (`opencv`, `mediapipe`, `pydirectinput`, `pyautogui`), dan langsung membuka controller.
-
----
-
-### Cara 2: Menjalankan via Terminal / CMD
+### Menjalankan via Terminal / CMD
 ```bash
 # 1. Clone repository
 git clone https://github.com/IlhamXkyo/TrackingHand.git
 cd TrackingHand
 
-# 2. Install dependensi
+# 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Jalankan
+# 3. Jalankan Bionic Hand MoCap
+python hand_tracker.py
+
+# Atau jalankan Air Mouse / Game Controller
 python main.py
 ```
 
 ---
 
-## 📦 Compile ke Standalone Windows `.EXE`
+## 📁 Struktur Proyek
 
-Ingin menjalankan aplikasi tanpa perlu membuka terminal atau menginstall Python di komputer lain?
-
-1. Jalankan berkas:
-   ```
-   build_exe.bat
-   ```
-2. Tunggu proses PyInstaller selesai (sekitar 1-2 menit).
-3. File executable akan tersedia di folder:
-   ```
-   dist/TrackingHand/TrackingHand.exe
-   ```
+```
+TrackingHand/
+├── hand_tracker.py           # Engine MoCap 3D dengan visual Tangan Robot Roblox & Cyber HUD
+├── run_hand_tracker.bat      # Launcher 1-klik untuk Bionic Hand MoCap
+├── main.py                   # Engine Air Mouse & Roblox Game Controller
+├── run_controller.bat        # Launcher 1-klik untuk Air Mouse Controller
+├── build_exe.bat             # Skrip pembuat standalone .EXE Windows
+├── requirements.txt          # Daftar dependensi Python
+├── roblox/
+│   ├── RoboticHandController.lua  # Script ServerScriptService untuk Roblox Studio
+│   └── BuildRoboticHand.lua       # Generator standalone model tangan 107-part
+└── README.md
+```
 
 ---
 
 ## ⌨️ Hotkeys
 
-- **`M`**: Ganti mode (**WINDOWS AIR MOUSE** $\leftrightarrow$ **ROBLOX GAME CONTROLLER**).
-- **`T`**: Buka/tutup kembali panduan tutorial visual.
-- **`TAB`**: Ganti halaman tutorial (Halaman 1: Windows / Halaman 2: Roblox).
-- **`SPACE` / `ENTER`**: Mulai kontrol dari layar tutorial.
-- **`Q`**: Keluar dari aplikasi dengan aman (melepaskan semua tombol keyboard yang tertahan).
+- **Pada `hand_tracker.py`**:
+  - **`Q`**: Menutup tracker kamera dengan aman.
+- **Pada `main.py`**:
+  - **`M`**: Ganti mode (**AIR MOUSE** $\leftrightarrow$ **GAME CONTROLLER**).
+  - **`T`**: Buka/tutup panduan tutorial visual.
+  - **`TAB`**: Ganti halaman tutorial.
+  - **`SPACE` / `ENTER`**: Mulai kontrol dari layar tutorial.
+  - **`Q`**: Keluar dari aplikasi.
 
 ---
 
 ## 📜 Lisensi
-
-Didistribusikan di bawah lisensi MIT. Lihat berkas `LICENSE` untuk detailnya.
+Didistribusikan di bawah lisensi MIT.
 
 Dibuat dengan ❤️ oleh [IlhamXkyo](https://github.com/IlhamXkyo).
