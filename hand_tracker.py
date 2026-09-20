@@ -19,6 +19,13 @@ import numpy as np
 import cv2
 import mediapipe as mp
 
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 # ==============================================================================
 # GLOBAL TRACKING STATE
 # ==============================================================================
@@ -491,8 +498,8 @@ def run_tracker():
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
     cap.set(cv2.CAP_PROP_FPS, 30)
 
-    print("\n==================================================================")
-    print("🤖 ROBLOX BIONIC HAND TRACKER - BIOMECHANICAL PHYSICS & PNP ENGINE")
+    print("==================================================================")
+    print("[+] ROBLOX BIONIC HAND TRACKER - BIOMECHANICAL PHYSICS & PNP ENGINE")
     print(" - Solusi 100% Invarian terhadap Tangan Tunduk & Miring (No False Curl)")
     print(" - Estimator PnP 3D Rigid Carpal-Metacarpal (cv2.solvePnP)")
     print(" - 22-DOF Kinematic Kalman Filter dengan prediksi inersia kecepatan")
