@@ -11,7 +11,7 @@ hand = Instance.new("Model")
 hand.Name = "RoboticHand"
 hand.Parent = workspace
 
-local SCALE = 2.2
+local SCALE = 3.0 -- Larger, massive colossal bionic hand!
 local basePos = Vector3.new(18, 0.5, 0)
 local baseRot = CFrame.lookAt(basePos, Vector3.new(0, 0.5, 0)).Rotation
 
@@ -30,28 +30,28 @@ local function makePart(name, size, cf, color, mat, parent, shape)
     return p
 end
 
--- 1. PEDESTAL & NEON RING
-local pedestal = makePart("PedestalPlatform", Vector3.new(14 * SCALE * 0.45, 1.2 * SCALE, 14 * SCALE * 0.45), CFrame.new(basePos), Color3.fromRGB(28, 30, 36), Enum.Material.DiamondPlate, hand)
+-- 1. PEDESTAL & NEON RING (Sturdy, wider base)
+local pedestal = makePart("PedestalPlatform", Vector3.new(15 * SCALE * 0.45, 1.0 * SCALE, 15 * SCALE * 0.45), CFrame.new(basePos), Color3.fromRGB(28, 30, 36), Enum.Material.DiamondPlate, hand)
 pedestal.CanCollide = true
 
-local neonRing = makePart("PedestalNeonRing", Vector3.new(0.4 * SCALE, 12 * SCALE * 0.45, 12 * SCALE * 0.45), CFrame.new(basePos + Vector3.new(0, 0.7 * SCALE, 0)) * CFrame.Angles(0, 0, math.rad(90)), Color3.fromRGB(0, 230, 255), Enum.Material.Neon, hand, Enum.PartType.Cylinder)
+local neonRing = makePart("PedestalNeonRing", Vector3.new(0.35 * SCALE, 13 * SCALE * 0.45, 13 * SCALE * 0.45), CFrame.new(basePos + Vector3.new(0, 0.6 * SCALE, 0)) * CFrame.Angles(0, 0, math.rad(90)), Color3.fromRGB(0, 230, 255), Enum.Material.Neon, hand, Enum.PartType.Cylinder)
 
--- 2. FOREARM & WRIST BALL
-local forearmLocalY = 3.6
+-- 2. LOWERED FOREARM & WRIST BALL
+local forearmLocalY = 2.4
 local curForearmCF = CFrame.new(basePos) * baseRot * CFrame.new(0, forearmLocalY * SCALE, 0)
-makePart("ForearmCore", Vector3.new(1.8 * SCALE, 5.0 * SCALE, 1.8 * SCALE), curForearmCF, Color3.fromRGB(35, 38, 46), Enum.Material.Metal, hand)
-makePart("ForearmBackPlate", Vector3.new(2.1 * SCALE, 4.8 * SCALE, 0.4 * SCALE), curForearmCF * CFrame.new(0, 0, 0.42 * SCALE), Color3.fromRGB(50, 55, 65), Enum.Material.DiamondPlate, hand)
-makePart("PistonRodL", Vector3.new(0.35 * SCALE, 4.5 * SCALE, 0.35 * SCALE), curForearmCF * CFrame.new(-0.85 * SCALE, 0, 0.1 * SCALE), Color3.fromRGB(200, 205, 215), Enum.Material.Metal, hand, Enum.PartType.Cylinder)
-makePart("PistonRodR", Vector3.new(0.35 * SCALE, 4.5 * SCALE, 0.35 * SCALE), curForearmCF * CFrame.new(0.85 * SCALE, 0, 0.1 * SCALE), Color3.fromRGB(200, 205, 215), Enum.Material.Metal, hand, Enum.PartType.Cylinder)
-makePart("ForearmNeonStrip", Vector3.new(0.12 * SCALE, 4.4 * SCALE, 0.1 * SCALE), curForearmCF * CFrame.new(0, 0, -0.42 * SCALE), Color3.fromRGB(0, 230, 255), Enum.Material.Neon, hand)
+makePart("ForearmCore", Vector3.new(1.8 * SCALE, 3.4 * SCALE, 1.8 * SCALE), curForearmCF, Color3.fromRGB(35, 38, 46), Enum.Material.Metal, hand)
+makePart("ForearmBackPlate", Vector3.new(2.1 * SCALE, 3.2 * SCALE, 0.4 * SCALE), curForearmCF * CFrame.new(0, 0, 0.42 * SCALE), Color3.fromRGB(50, 55, 65), Enum.Material.DiamondPlate, hand)
+makePart("PistonRodL", Vector3.new(0.35 * SCALE, 3.0 * SCALE, 0.35 * SCALE), curForearmCF * CFrame.new(-0.85 * SCALE, 0, 0.1 * SCALE), Color3.fromRGB(200, 205, 215), Enum.Material.Metal, hand, Enum.PartType.Cylinder)
+makePart("PistonRodR", Vector3.new(0.35 * SCALE, 3.0 * SCALE, 0.35 * SCALE), curForearmCF * CFrame.new(0.85 * SCALE, 0, 0.1 * SCALE), Color3.fromRGB(200, 205, 215), Enum.Material.Metal, hand, Enum.PartType.Cylinder)
+makePart("ForearmNeonStrip", Vector3.new(0.12 * SCALE, 3.0 * SCALE, 0.1 * SCALE), curForearmCF * CFrame.new(0, 0, -0.42 * SCALE), Color3.fromRGB(0, 230, 255), Enum.Material.Neon, hand)
 
-local wristLocalY = forearmLocalY + 3.0
+local wristLocalY = forearmLocalY + 2.0
 local wristPivotCF = CFrame.new(basePos) * baseRot * CFrame.new(0, wristLocalY * SCALE, 0)
 makePart("WristBall", Vector3.new(1.5 * SCALE, 1.5 * SCALE, 1.5 * SCALE), wristPivotCF, Color3.fromRGB(220, 225, 235), Enum.Material.Metal, hand, Enum.PartType.Ball)
 makePart("WristRing", Vector3.new(0.35 * SCALE, 2.0 * SCALE, 2.0 * SCALE), wristPivotCF * CFrame.Angles(0, 0, math.rad(90)), Color3.fromRGB(0, 230, 255), Enum.Material.Neon, hand, Enum.PartType.Cylinder)
 
 -- 3. PALM CHASSIS & ARMOR
-local curPalmCF = wristPivotCF * CFrame.new(0, 2.0 * SCALE, 0)
+local curPalmCF = wristPivotCF * CFrame.new(0, 1.8 * SCALE, 0)
 makePart("PalmBody", Vector3.new(2.4 * SCALE, 2.6 * SCALE, 0.75 * SCALE), curPalmCF, Color3.fromRGB(35, 38, 46), Enum.Material.Metal, hand)
 makePart("PalmThenar", Vector3.new(1.1 * SCALE, 1.4 * SCALE, 0.7 * SCALE), curPalmCF * CFrame.new(-0.98 * SCALE, -0.42 * SCALE, -0.22 * SCALE) * CFrame.Angles(math.rad(12), math.rad(22), math.rad(24)), Color3.fromRGB(48, 52, 62), Enum.Material.Metal, hand)
 makePart("PalmHypothenar", Vector3.new(0.85 * SCALE, 1.3 * SCALE, 0.65 * SCALE), curPalmCF * CFrame.new(1.05 * SCALE, -0.4 * SCALE, -0.1 * SCALE) * CFrame.Angles(0, 0, math.rad(-6)), Color3.fromRGB(48, 52, 62), Enum.Material.Metal, hand)
